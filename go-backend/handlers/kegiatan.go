@@ -31,3 +31,23 @@ func DeleteKegiatan(c *fiber.Ctx) error {
 	config.DB.Exec("DELETE FROM kegiatan WHERE id = ? AND tenant_id = ?", c.Params("id"), tid)
 	return c.JSON(fiber.Map{"message": "Kegiatan dihapus"})
 }
+
+func UpdateKegiatan(c *fiber.Ctx) error {
+	tid := c.Locals("tenant_id").(int)
+	var body struct {
+		Nama     string `json:"nama"`
+		Kategori string `json:"kategori"`
+	}
+	if err := c.BodyParser(&body); err != nil {
+		return c.Status(400).JSON(fiber.Map{"message": "Invalid request"})
+	}
+	if body.Nama == "" {
+		return c.Status(400).JSON(fiber.Map{"message": "Nama wajib"})
+	}
+	if body.Kategori == "" {
+		body.Kategori = "tambahan"
+	}
+	config.DB.Exec("UPDATE kegiatan SET nama = ?, kategori = ? WHERE id = ? AND tenant_id = ?",
+		body.Nama, body.Kategori, c.Params("id"), tid)
+	return c.JSON(fiber.Map{"message": "Kegiatan diperbarui", "nama": body.Nama, "kategori": body.Kategori})
+}

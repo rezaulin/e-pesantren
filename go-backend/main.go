@@ -163,6 +163,7 @@ func main() {
 	// ── Kegiatan ────────────────────────────────────────
 	auth.Get("/kegiatan", handlers.GetKegiatan)
 	auth.Post("/kegiatan", middleware.RequireAdmin, handlers.CreateKegiatan)
+	auth.Put("/kegiatan/:id", middleware.RequireAdmin, handlers.UpdateKegiatan)
 	auth.Delete("/kegiatan/:id", middleware.RequireAdmin, handlers.DeleteKegiatan)
 
 	// ── Kelompok ────────────────────────────────────────

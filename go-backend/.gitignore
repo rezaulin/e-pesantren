@@ -1,0 +1,25 @@
+# Environment & secrets
+.env
+.env.*
+!.env.example
+
+# Compiled binaries
+*.exe
+*.exe~
+*.o
+*.so
+*.dylib
+main
+pesantren-server
+pesantren-multi
+tmp_build*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db

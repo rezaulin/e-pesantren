@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pendaftaran Santri Baru</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#f0fdf4 0%,#ecfdf5 50%,#f0fdf4 100%);min-height:100vh;color:#1e293b}
+.container{max-width:640px;margin:0 auto;padding:1.5rem}
+.header{text-align:center;margin-bottom:2rem;padding:2rem 1rem}
+.header .logo{width:60px;height:60px;background:linear-gradient(135deg,#16a34a,#15803d);border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;box-shadow:0 8px 24px rgba(22,163,74,.25)}
+.header .logo i{font-size:1.8rem;color:#fff}
+.header h1{font-size:1.5rem;font-weight:700;color:#15803d;margin-bottom:.3rem}
+.header p{font-size:.88rem;color:#64748b}
+.header .tenant-name{font-size:1.1rem;font-weight:600;color:#064e3b;margin-bottom:.2rem}
+.card{background:#fff;border-radius:16px;padding:1.8rem;box-shadow:0 4px 20px rgba(0,0,0,.06);margin-bottom:1.2rem}
+.card h2{font-size:1.05rem;font-weight:700;color:#15803d;margin-bottom:1.2rem;display:flex;align-items:center;gap:.5rem}
+.fg{margin-bottom:1rem}
+.fg label{display:block;font-size:.78rem;font-weight:600;color:#374151;margin-bottom:.35rem}
+.fg input,.fg select,.fg textarea{width:100%;padding:.7rem .9rem;border:1.5px solid #e2e8f0;border-radius:10px;font-size:.88rem;font-family:inherit;transition:border-color .2s,box-shadow .2s;background:#fff}
+.fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:#16a34a;box-shadow:0 0 0 3px rgba(22,163,74,.1)}
+.fg textarea{resize:vertical;min-height:80px}
+.fg .hint{font-size:.72rem;color:#94a3b8;margin-top:.25rem}
+.row{display:flex;gap:.8rem}
+.row .fg{flex:1}
+.radio-group{display:flex;gap:.5rem}
+.radio-group label{display:flex;align-items:center;gap:.4rem;padding:.5rem .8rem;border:1.5px solid #e2e8f0;border-radius:10px;cursor:pointer;font-size:.82rem;font-weight:500;transition:.2s}
+.radio-group input:checked+span{color:#16a34a;font-weight:600}
+.radio-group label:has(input:checked){border-color:#16a34a;background:rgba(22,163,74,.05)}
+.radio-group input{accent-color:#16a34a}
+.btn-submit{width:100%;padding:.9rem;background:linear-gradient(135deg,#16a34a,#15803d);color:#fff;border:none;border-radius:12px;font-size:.95rem;font-weight:600;cursor:pointer;transition:.2s;font-family:inherit}
+.btn-submit:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(22,163,74,.3)}
+.btn-submit:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.success{display:none;text-align:center;padding:3rem 1.5rem}
+.success .icon{width:80px;height:80px;background:linear-gradient(135deg,#16a34a,#15803d);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;box-shadow:0 8px 24px rgba(22,163,74,.25)}
+.success .icon i{font-size:2.5rem;color:#fff}
+.success h2{font-size:1.3rem;color:#15803d;margin-bottom:.5rem}
+.success p{color:#64748b;font-size:.9rem;line-height:1.6}
+.alert{padding:.8rem 1rem;border-radius:10px;font-size:.82rem;margin-bottom:1rem;display:none}
+.alert.error{display:block;background:#fef2f2;border:1px solid #fecaca;color:#dc2626}
+@media(max-width:480px){.row{flex-direction:column;gap:0} .container{padding:1rem}}
+</style>
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="logo"><i class="ri-quill-pen-line"></i></div>
+    <div class="tenant-name" id="tenantName">Pesantren</div>
+    <h1>Pendaftaran Santri Baru</h1>
+    <p>Isi formulir di bawah untuk mendaftar</p>
+  </div>
+
+  <div id="formSection">
+    <div id="alertBox" class="alert error"></div>
+
+    <div class="card">
+      <h2><i class="ri-user-line"></i> Data Calon Santri</h2>
+      <div class="fg"><label>Nama Lengkap *</label><input id="pNama" placeholder="Nama lengkap calon santri"></div>
+      <div class="row">
+        <div class="fg"><label>Tempat Lahir</label><input id="pTempat" placeholder="Kota/Kabupaten"></div>
+        <div class="fg"><label>Tanggal Lahir</label><input type="date" id="pTglLahir"></div>
+      </div>
+      <div class="fg"><label>Jenis Kelamin</label>
+        <div class="radio-group">
+          <label><input type="radio" name="pJK" value="L" checked><span>Laki-laki</span></label>
+          <label><input type="radio" name="pJK" value="P"><span>Perempuan</span></label>
+        </div>
+      </div>
+      <div class="fg"><label>Alamat</label><textarea id="pAlamat" rows="2" placeholder="Alamat lengkap"></textarea></div>
+      <div class="fg"><label>Asal Sekolah</label><input id="pAsal" placeholder="Nama sekolah sebelumnya"></div>
+    </div>
+
+    <div class="card">
+      <h2><i class="ri-parent-line"></i> Data Orang Tua/Wali</h2>
+      <div class="row">
+        <div class="fg"><label>Nama Ayah</label><input id="pAyah" placeholder="Nama ayah"></div>
+        <div class="fg"><label>Nama Ibu</label><input id="pIbu" placeholder="Nama ibu"></div>
+      </div>
+      <div class="fg"><label>No. HP/WhatsApp *</label><input id="pHP" type="tel" placeholder="08xxxxxxxxxx">
+        <div class="hint">Nomor ini akan digunakan sebagai akun login wali jika diterima</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><i class="ri-sticky-note-line"></i> Catatan Tambahan</h2>
+      <div class="fg"><label>Catatan (opsional)</label>
+        <textarea id="pCatatan" rows="3" placeholder="Informasi tambahan, kebutuhan khusus, dll..."></textarea>
+      </div>
+    </div>
+
+    <button class="btn-submit" id="btnSubmit" onclick="submitPSB()">
+      <i class="ri-send-plane-line"></i> Kirim Pendaftaran
+    </button>
+  </div>
+
+  <div class="success card" id="successSection">
+    <div class="icon"><i class="ri-checkbox-circle-line"></i></div>
+    <h2>Pendaftaran Berhasil!</h2>
+    <p>Data Anda telah diterima. Silakan tunggu informasi selanjutnya dari pesantren melalui nomor yang telah didaftarkan.</p>
+  </div>
+</div>
+
+<script>
+const subdomain = window.location.pathname.split('/psb/')[1] || '';
+// Fetch real tenant name from database
+(async()=>{
+  try{
+    const r=await fetch('/api/psb/'+subdomain+'/info');
+    const d=await r.json();
+    if(d.nama)document.getElementById('tenantName').textContent=d.nama;
+    if(d.alamat){const el=document.createElement('p');el.style.cssText='font-size:.82rem;color:#64748b;margin-top:.2rem';el.textContent=d.alamat;document.getElementById('tenantName').after(el);}
+    document.title='PSB — '+d.nama;
+    // Show quota info
+    if(d.kuota>0){
+      const sisa=d.kuota-d.jumlah_pendaftar;
+      const qi=document.createElement('div');
+      qi.style.cssText='margin:-.5rem 0 1rem;text-align:center;font-size:.82rem;padding:.5rem;border-radius:10px;';
+      if(sisa<=0){
+        qi.style.background='#fef2f2';qi.style.border='1px solid #fecaca';qi.style.color='#dc2626';
+        qi.innerHTML='<strong>Kuota pendaftaran sudah penuh</strong> ('+d.kuota+'/'+d.kuota+')';
+        document.getElementById('formSection').style.display='none';
+      }else{
+        qi.style.background='#f0fdf4';qi.style.border='1px solid #bbf7d0';qi.style.color='#15803d';
+        qi.innerHTML='Sisa kuota: <strong>'+sisa+'</strong> dari '+d.kuota+' pendaftar';
+      }
+      document.getElementById('formSection').before(qi);
+    }
+  }catch(e){
+    document.getElementById('tenantName').textContent=subdomain?subdomain.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase()):'Pesantren';
+  }
+})();
+
+async function submitPSB(){
+  const btn=document.getElementById('btnSubmit');
+  const alert=document.getElementById('alertBox');
+  alert.style.display='none';
+  const nama=document.getElementById('pNama').value.trim();
+  const hp=document.getElementById('pHP').value.trim();
+  if(!nama){alert.textContent='Nama wajib diisi';alert.style.display='block';return;}
+  if(!hp){alert.textContent='No HP wajib diisi';alert.style.display='block';return;}
+  btn.disabled=true;btn.innerHTML='<i class="ri-loader-4-line"></i> Mengirim...';
+  try{
+    const res=await fetch('/api/psb/'+subdomain,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        nama,
+        tempat_lahir:document.getElementById('pTempat').value.trim(),
+        tanggal_lahir:document.getElementById('pTglLahir').value,
+        jenis_kelamin:document.querySelector('input[name=pJK]:checked')?.value||'L',
+        alamat:document.getElementById('pAlamat').value.trim(),
+        asal_sekolah:document.getElementById('pAsal').value.trim(),
+        nama_ayah:document.getElementById('pAyah').value.trim(),
+        nama_ibu:document.getElementById('pIbu').value.trim(),
+        no_hp:hp,
+        catatan:document.getElementById('pCatatan').value.trim()
+      })
+    });
+    const data=await res.json();
+    if(!res.ok){alert.textContent=data.message||'Gagal mengirim';alert.style.display='block';btn.disabled=false;btn.innerHTML='<i class="ri-send-plane-line"></i> Kirim Pendaftaran';return;}
+    document.getElementById('formSection').style.display='none';
+    document.getElementById('successSection').style.display='block';
+  }catch(e){
+    alert.textContent='Terjadi kesalahan: '+e.message;alert.style.display='block';
+    btn.disabled=false;btn.innerHTML='<i class="ri-send-plane-line"></i> Kirim Pendaftaran';
+  }
+}
+</script>
+</body>
+</html>

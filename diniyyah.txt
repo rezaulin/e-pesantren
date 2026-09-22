@@ -1,0 +1,33 @@
+async function loadNilaiTableDiniyyah(){
+  const kdId=$('nilaiKelas').value, mpId=$('nilaiMapel').value, smt=$('nilaiSmt').value;
+  if(!kdId||!mpId||!smt)return toast('Pilih kelas, mapel dan semester');
+  const [members,existing,settings]=await Promise.all([api('/api/kelas-diniyyah/'+kdId+'/members'),api('/api/nilai-pelajaran?kelas_diniyyah_id='+kdId+'&semester='+smt+'&mata_pelajaran_id='+mpId),api('/api/settings').catch(()=>({}))]);
+  const existMap={};existing.forEach(n=>{existMap[n.santri_id]=n;});
+  let comps = [];
+  try { comps = JSON.parse(settings.komponen_nilai_diniyyah||'[]'); } catch(e){}
+  if(!comps.length) comps = [{nama:'Harian',bobot:30},{nama:'UTS',bobot:30},{nama:'UAS',bobot:40}];
+  window._nilaiCompsDin = comps;
+  let ths = comps.map(c=>`<th style="width:80px" title="Bobot: ${c.bobot}%">${c.nama}</th>`).join('');
+  $('nilaiTableArea').innerHTML=`<div class="card fade-up"><h3><i class="ri-table-line"></i> Tabel Nilai</h3>
+    <div class="table-wrap"><table><tr><th>Santri</th>${ths}<th style="width:80px">Akhir</th><th style="width:80px">KKM</th></tr>
+    ${members.map(m=>{
+      const e=existMap[m.id]||{};
+      let detail = {};
+      try{ detail=JSON.parse(e.nilai_detail||'{}'); }catch(e){}
+      let tds = comps.map((c, idx) => {
+        let val = detail[c.nama] !== undefined ? detail[c.nama] : '';
+        if(val==='' && c.nama.toLowerCase()=='harian') val=e.nilai_harian||'';
+        if(val==='' && c.nama.toLowerCase()=='uts') val=e.nilai_uts||'';
+        if(val==='' && c.nama.toLowerCase()=='uas') val=e.nilai_uas||'';
+        return `<td><input type="number" class="ni" id="nd_${m.id}_${idx}" value="${val}" min="0" max="100" style="width:70px" oninput="calcNADin(${m.id})"></td>`;
+      }).join('');
+      return `<tr><td>${m.nama}</td>
+      ${tds}
+      <td><strong id="nf_${m.id}">${e.nilai_akhir||'-'}</strong></td>
+      <td><input type="number" class="ni" id="nkkm_${m.id}" value="${e.kkm||75}" min="0" max="100" style="width:70px"></td></tr>`;
+    }).join('')}
+    ${!members.length?`<tr><td colspan="${comps.length+2}" style="text-align:center;color:var(--t3)">Belum ada anggota</td></tr>`:''}
+    </table></div>
+    <button class="btn btn-primary" style="margin-top:1rem" onclick="saveNilaiBulk(${kdId},'diniyyah')"><i class="ri-save-line"></i> Simpan Semua</button></div>`;
+  window._nilaiMembers=members;
+}

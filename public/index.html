@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#3b82f6">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="description" content="Sistem Manajemen Pesantren Terpadu">
+  <title>E-Pesantren</title>
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+  <link rel="apple-touch-icon" href="/icon-192.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" media="print" onload="this.media='all'">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/duotone/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=v22.0">
+</head>
+
+<body>
+
+  <!-- Loading Screen (tampil saat auto-login) -->
+  <div id="loadingScreen"
+    style="position:fixed;inset:0;z-index:9999;background:#f0f7ff;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1rem">
+    <img src="/icon-192.png" alt="Logo" style="width:64px;height:64px;border-radius:16px;animation:pulse 1.5s infinite">
+    <div style="font-size:.85rem;color:#64748b;font-weight:500">Memuat...</div>
+  </div>
+  <style>
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1)
+      }
+
+      50% {
+        opacity: .6;
+        transform: scale(.95)
+      }
+    }
+  </style>
+
+  <!-- Login -->
+  <div class="login-page" id="loginPage" style="display:none">
+    <div class="login-box">
+      <img src="/icon-192.png" alt="Logo" class="login-logo-img"
+        onerror="this.outerHTML='<div style=\\'font-size:3rem;color:var(--p);margin-bottom:.5rem;text-shadow:0 10px 20px rgba(79,70,229,.2)\\'><i class=\\'ri-book-open-line\\'></i></div>'">
+      <h2>E-Pesantren</h2>
+      <div class="subtitle">Sistem Manajemen Pesantren Terpadu</div>
+      <div class="fg"><label>Username</label><input id="loginUser" placeholder="Masukkan username"></div>
+      <div class="fg"><label>Password</label><input id="loginPass" type="password" placeholder="Masukkan password">
+      </div>
+      <button class="btn-login" onclick="doLogin()">Masuk</button>
+    </div>
+  </div>
+
+  <!-- App -->
+  <div class="app" id="app">
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+    <div class="sidebar" id="sidebar">
+      <div class="sb-head">
+        <img src="/icon-192.png" alt="">
+        <div>
+          <div class="sb-name" id="sidebarName">E-Pesantren</div>
+          <div class="sb-sub">Management System</div>
+        </div>
+      </div>
+      <div style="padding:.5rem 1rem"><span class="sb-badge" id="sidebarRole">ADMIN</span></div>
+      <div class="sb-menu" id="sidebarMenu"></div>
+      <div class="sb-promo hide-on-mobile">
+        <div class="sbp-icon"><i class="ph-duotone ph-device-mobile"></i></div>
+        <div class="sbp-text">
+          <div class="sbp-title">Akses cepat di<br>perangkat mobile</div>
+          <div class="sbp-sub">Gunakan aplikasi Pesantren<br>kapan pun, di mana pun.</div>
+        </div>
+        <button class="sbp-btn">Unduh Aplikasi</button>
+      </div>
+    </div>
+
+    <div class="header">
+      <div class="h-left hide-on-pc">
+        <button class="hamburger" onclick="toggleSidebar()"><i class="ri-menu-line"></i></button>
+        <span class="h-title" id="hTitle" style="display:none">E-Pesantren</span>
+      </div>
+
+      <div class="h-center hide-on-mobile" style="flex:1; max-width: 600px; padding: 0 2rem;">
+        <div style="position:relative; width: 100%">
+          <i class="ph-duotone ph-magnifying-glass"
+            style="position:absolute;left:1.2rem;top:50%;transform:translateY(-50%);color:var(--t3);font-size:1.2rem"></i>
+          <input type="text" id="topSearch" placeholder="Cari santri, kelas, guru, atau laporan..." autocomplete="off"
+            style="width:100%;padding:.7rem 1rem .7rem 3rem;border-radius:24px;border:1px solid var(--border);font-size:.85rem;background:#f8fafc;outline:none;transition:.2s">
+        </div>
+      </div>
+
+      <div class="h-right">
+
+        <button class="h-btn" title="Notifikasi"><i class="ri-notification-3-line"></i></button>
+        <div class="h-avatar" id="avatarInit" onclick="showUserMenu()">A</div>
+      </div>
+    </div>
+
+    <div class="main" id="main"></div>
+
+    <div class="bottom-nav" id="bottomNav">
+      <a onclick="nav('dashboard')" id="bnav-dashboard"><i class="ri-home-5-line"></i>Beranda</a>
+      <a onclick="nav('absensi')" id="bnav-absensi"><i class="ri-checkbox-circle-line"></i>Absen</a>
+      <a onclick="nav('rekap')" id="bnav-rekap"><i class="ri-file-list-3-line"></i>Rekap</a>
+      <a onclick="nav('waktu')" id="bnav-waktu"><i class="ri-time-line"></i>Waktu</a>
+      <a onclick="openMoreMenu()" id="bnav-more"><i class="ri-menu-2-line"></i>Lainnya</a>
+    </div>
+  </div>
+
+  <div class="modal-bg" id="modalBg" onclick="if(event.target===this)hideModal()">
+    <div class="modal" id="modal"></div>
+  </div>
+  <div class="toast" id="toast"></div>
+
+  <script>
+    window.$ = window.$ || (id => document.getElementById(id));
+    function openMoreMenu() { toggleSidebar(); }
+    function closeSidebar() { document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebarOverlay').classList.remove('show'); }
+    function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); document.getElementById('sidebarOverlay').classList.toggle('show'); }
+    function showUserMenu() {
+      document.getElementById('modal').innerHTML = `
+    <div style="text-align:center; padding: 1rem 0">
+      <div style="width:64px; height:64px; background:var(--p); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:2rem; font-weight:bold; margin:0 auto 1rem; box-shadow: 0 4px 12px rgba(37,99,235,0.2);">
+        ${window.user?.nama ? window.user.nama[0].toUpperCase() : 'U'}
+      </div>
+      <h3 style="margin-bottom:0.2rem;">${window.user?.nama || ''}</h3>
+      <p style="color:var(--t3); font-size:0.85rem; margin-bottom:1.5rem; text-transform:capitalize;">Role: ${window.user?.role || ''}</p>
+      
+      <div style="text-align:left; background:#f8fafc; padding:1rem; border-radius:16px; margin-bottom:1.5rem; border:1px solid var(--border)">
+        <h4 style="font-size:0.85rem; margin-bottom:0.8rem; color:var(--t2)"><i class="ri-lock-password-line"></i> Ganti Password</h4>
+        <div class="fg" style="margin-bottom:0.5rem">
+          <input type="password" id="cpNew" placeholder="Password Baru" style="width:100%; font-size:0.85rem; padding:0.6rem">
+        </div>
+        <div class="fg" style="margin-bottom:0.8rem">
+          <input type="password" id="cpConfirm" placeholder="Konfirmasi Password" style="width:100%; font-size:0.85rem; padding:0.6rem">
+        </div>
+        <button class="btn btn-primary btn-sm btn-full" onclick="changePassword(this)"><i class="ri-save-line"></i> Simpan Password</button>
+      </div>
+
+      <button class="btn btn-danger btn-full" onclick="logout();hideModal()"><i class="ri-logout-box-r-line"></i> Keluar / Logout</button>
+    </div>`;
+      showModal();
+    }
+
+    async function changePassword(btn) {
+      const newPass = document.getElementById('cpNew').value;
+      const confPass = document.getElementById('cpConfirm').value;
+      if (!newPass || !confPass) return toast('Harap isi semua kolom password');
+      if (newPass !== confPass) return toast('Password tidak sama');
+      if (newPass.length < 6) return toast('Password minimal 6 karakter');
+
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '<i class="ri-loader-4-line spin"></i> Menyimpan...';
+      btn.disabled = true;
+
+      try {
+        const res = await api('/api/change-password', { method: 'POST', body: JSON.stringify({ new_password: newPass }) });
+        toast('Password berhasil diubah!');
+        hideModal();
+      } catch (e) {
+        toast('Gagal: ' + e.message);
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      }
+    }
+  </script>
+  <!-- APP SCRIPTS -->
+  <script defer src="dist/app-core-v6.min.js"></script>
+  <script defer src="dist/app-absensi-v4.min.js"></script>
+  <script defer src="dist/app-views-v4.min.js"></script>
+  <script defer src="dist/app-penilaian-v4.min.js"></script>
+  <script defer src="dist/app-nilai-kegiatan-v4.min.js"></script>
+  <script defer src="dist/app-extra-v4.min.js"></script>
+  <script defer src="dist/app-tahfidz-v4.min.js"></script>
+  <script defer src="dist/app-sangu-v4.min.js"></script>
+
+  <!-- PWA Install Prompt -->
+  <div id="pwaInstallBanner" class="pwa-banner" style="display:none">
+    <div class="pwa-banner-glow"></div>
+    <div class="pwa-banner-content">
+      <div class="pwa-banner-top">
+        <img src="/icon-192.png" class="pwa-banner-icon">
+        <div class="pwa-banner-text">
+          <div class="pwa-banner-title">📲 Install Aplikasi</div>
+          <div class="pwa-banner-sub">Akses lebih cepat & bisa offline</div>
+        </div>
+        <button onclick="dismissInstall()" class="pwa-banner-close">&times;</button>
+      </div>
+      <div id="pwaInstallActions" class="pwa-banner-actions">
+        <button id="pwaInstallBtn" onclick="triggerInstall()" class="pwa-btn-install">Install Sekarang</button>
+        <button onclick="dismissInstall()" class="pwa-btn-later">Nanti Saja</button>
+      </div>
+      <div id="pwaIosGuide" style="display:none" class="pwa-ios-guide">
+        <div class="pwa-ios-steps">
+          <span>1. Tap <strong>Share</strong> <i class="ri-share-line"></i></span>
+          <span>2. Scroll & tap <strong>"Add to Home Screen"</strong></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .pwa-banner {
+      position: fixed;
+      bottom: 75px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 1.5rem);
+      max-width: 400px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #fff;
+      border-radius: 18px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, .35), 0 0 0 1px rgba(255, 255, 255, .08);
+      z-index: 9998;
+      animation: pwaBannerIn .5s cubic-bezier(.16, 1, .3, 1);
+      overflow: hidden
+    }
+
+    .pwa-banner-glow {
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(from 180deg, transparent, rgba(99, 102, 241, .15), transparent, rgba(168, 85, 247, .15), transparent);
+      animation: pwaGlow 4s linear infinite
+    }
+
+    .pwa-banner-content {
+      position: relative;
+      padding: 1rem 1.1rem;
+      background: linear-gradient(135deg, rgba(15, 23, 42, .95), rgba(30, 41, 59, .95));
+      border-radius: 18px
+    }
+
+    .pwa-banner-top {
+      display: flex;
+      align-items: center;
+      gap: .75rem
+    }
+
+    .pwa-banner-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, .3)
+    }
+
+    .pwa-banner-text {
+      flex: 1
+    }
+
+    .pwa-banner-title {
+      font-weight: 800;
+      font-size: .92rem;
+      margin-bottom: .1rem
+    }
+
+    .pwa-banner-sub {
+      font-size: .73rem;
+      opacity: .7
+    }
+
+    .pwa-banner-close {
+      background: none;
+      border: none;
+      color: rgba(255, 255, 255, .5);
+      font-size: 1.4rem;
+      cursor: pointer;
+      padding: 4px;
+      line-height: 1;
+      transition: .2s
+    }
+
+    .pwa-banner-close:hover {
+      color: #fff
+    }
+
+    .pwa-banner-actions {
+      display: flex;
+      gap: .5rem;
+      margin-top: .75rem
+    }
+
+    .pwa-btn-install {
+      flex: 1;
+      padding: .6rem;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: .82rem;
+      cursor: pointer;
+      font-family: inherit;
+      transition: .2s;
+      box-shadow: 0 4px 15px rgba(99, 102, 241, .4)
+    }
+
+    .pwa-btn-install:active {
+      transform: scale(.97)
+    }
+
+    .pwa-btn-later {
+      padding: .6rem .9rem;
+      background: rgba(255, 255, 255, .08);
+      color: rgba(255, 255, 255, .7);
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 12px;
+      font-size: .8rem;
+      cursor: pointer;
+      font-family: inherit;
+      transition: .2s
+    }
+
+    .pwa-btn-later:hover {
+      background: rgba(255, 255, 255, .12);
+      color: #fff
+    }
+
+    .pwa-ios-guide {
+      margin-top: .7rem;
+      padding: .65rem .8rem;
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 12px
+    }
+
+    .pwa-ios-steps {
+      display: flex;
+      flex-direction: column;
+      gap: .35rem;
+      font-size: .78rem;
+      color: rgba(255, 255, 255, .85)
+    }
+
+    .pwa-ios-steps i {
+      font-size: .9rem;
+      vertical-align: middle
+    }
+
+    @keyframes pwaBannerIn {
+      from {
+        transform: translateX(-50%) translateY(120px);
+        opacity: 0
+      }
+
+      to {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1
+      }
+    }
+
+    @keyframes pwaGlow {
+      from {
+        transform: rotate(0deg)
+      }
+
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    @keyframes pwaBannerOut {
+      from {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1
+      }
+
+      to {
+        transform: translateX(-50%) translateY(120px);
+        opacity: 0
+      }
+    }
+  </style>
+
+  <script>
+    // Service Worker Registration
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').then(() => console.log('SW registered')).catch(e => console.log('SW error:', e));
+    }
+
+    // PWA Install Prompt
+    let _deferredPrompt = null;
+    let _isIos = (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream);
+    let _isStandalone = window.matchMedia('(display-mode: standalone)').matches || (navigator.standalone === true);
+
+    window.addEventListener('beforeinstallprompt', e => {
+      e.preventDefault();
+      _deferredPrompt = e;
+    });
+
+    // Called from showApp() after successful login
+    function showPwaInstallPrompt() {
+      // Don't show if already in standalone mode (installed)
+      if (_isStandalone) return;
+      // Don't show if dismissed this session
+      if (sessionStorage.getItem('pwa_dismissed')) return;
+
+      const banner = document.getElementById('pwaInstallBanner');
+      if (!banner) return;
+
+      if (_deferredPrompt) {
+        // Android/Chrome — show install button
+        document.getElementById('pwaInstallActions').style.display = 'flex';
+        document.getElementById('pwaIosGuide').style.display = 'none';
+        banner.style.display = 'block';
+      } else if (_isIos) {
+        // iOS Safari — show manual guide
+        document.getElementById('pwaInstallActions').style.display = 'none';
+        document.getElementById('pwaIosGuide').style.display = 'block';
+        banner.style.display = 'block';
+      }
+      // If neither (desktop without prompt), don't show
+    }
+
+    function triggerInstall() {
+      if (!_deferredPrompt) return;
+      _deferredPrompt.prompt();
+      _deferredPrompt.userChoice.then(r => {
+        if (r.outcome === 'accepted') { console.log('PWA installed'); toast('✅ Aplikasi berhasil di-install!'); }
+        _deferredPrompt = null;
+        document.getElementById('pwaInstallBanner').style.display = 'none';
+        sessionStorage.setItem('pwa_dismissed', '1');
+      });
+    }
+    function dismissInstall() {
+      const banner = document.getElementById('pwaInstallBanner');
+      banner.style.animation = 'pwaBannerOut .3s ease forwards';
+      setTimeout(() => { banner.style.display = 'none'; banner.style.animation = ''; }, 300);
+      sessionStorage.setItem('pwa_dismissed', '1');
+    }
+  </script>
+</body>
+
+</html>

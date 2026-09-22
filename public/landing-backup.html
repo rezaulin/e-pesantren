@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="E-Pesantren — Sistem Manajemen Pesantren Digital. Absensi, Raport, Pelanggaran, dan lainnya dalam satu platform.">
+<title>E-Pesantren — Kelola Pesantren Lebih Mudah</title>
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--p:#7c3aed;--p2:#6d28d9;--p3:#8b5cf6;--dark:#1e1b4b;--text:#1e1b4b;--t2:#4c4577;--t3:#9ca3af;--bg:#faf5ee;--card:#fff;--r:16px;
+--g1:linear-gradient(135deg,#7c3aed,#06b6d4);--g2:linear-gradient(135deg,#f472b6,#fb923c);--g3:linear-gradient(135deg,#34d399,#06b6d4);--g4:linear-gradient(135deg,#60a5fa,#818cf8)}
+body{font-family:'Outfit',system-ui,sans-serif;color:var(--text);background:var(--bg);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+.container{max-width:1140px;margin:0 auto;padding:0 1.5rem}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes up{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,245,238,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,0,0,.05);transition:.3s}
+.nav .container{display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-brand{display:flex;align-items:center;gap:.6rem;font-weight:800;font-size:1.1rem;color:var(--p2)}
+.nav-brand img{width:36px;height:36px;border-radius:10px}
+.nav-links{display:flex;align-items:center;gap:2rem}
+.nav-links a{font-size:.88rem;font-weight:500;color:var(--t2);transition:.2s}
+.nav-links a:hover{color:var(--p)}
+.nav-cta{padding:.5rem 1.4rem;background:var(--g1);color:#fff;border-radius:10px;font-weight:700;font-size:.85rem;transition:.2s;border:none;cursor:pointer}
+.nav-cta:hover{box-shadow:0 4px 15px rgba(124,58,237,.3);transform:translateY(-1px)}
+@media(max-width:768px){.nav-links{display:none}}
+
+/* HERO */
+.hero{padding:8rem 0 4rem;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 0%,rgba(124,58,237,.08),transparent 50%),radial-gradient(ellipse at 70% 100%,rgba(6,182,212,.06),transparent 50%);pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:.4rem;padding:.35rem 1rem;background:rgba(124,58,237,.08);color:var(--p);border-radius:20px;font-size:.78rem;font-weight:700;margin-bottom:1.5rem;animation:up .5s ease}
+.hero h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.1;letter-spacing:-.03em;margin-bottom:1rem;animation:up .6s ease}
+.hero h1 span{background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:clamp(.95rem,2vw,1.15rem);color:var(--t2);max-width:600px;margin:0 auto 2rem;line-height:1.6;animation:up .7s ease}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;animation:up .8s ease}
+.btn-hero{padding:.85rem 2rem;border-radius:var(--r);font-weight:700;font-size:.95rem;cursor:pointer;border:2px solid transparent;transition:.2s;display:inline-flex;align-items:center;gap:.4rem}
+.btn-hero.primary{background:var(--g1);color:#fff;border-color:transparent}.btn-hero.primary:hover{box-shadow:0 6px 20px rgba(124,58,237,.3);transform:translateY(-2px)}
+.btn-hero.outline{background:transparent;color:var(--p);border-color:var(--p)}.btn-hero.outline:hover{background:rgba(124,58,237,.06)}
+.hero-img{margin-top:3rem;animation:up 1s ease}
+.hero-img .mock{max-width:800px;width:100%;margin:0 auto;background:var(--dark);border-radius:20px;padding:.6rem;box-shadow:0 25px 60px rgba(30,27,75,.15)}
+.hero-img .mock-inner{background:var(--bg);border-radius:14px;overflow:hidden;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:var(--t3);font-size:.9rem}
+
+/* STATS BAR */
+.stats-bar{padding:2.5rem 0;background:var(--g1);color:#fff}
+.stats-bar .container{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;text-align:center}
+.stat-item .num{font-size:2rem;font-weight:900;line-height:1}
+.stat-item .lbl{font-size:.78rem;opacity:.7;margin-top:.3rem}
+@media(max-width:600px){.stats-bar .container{grid-template-columns:1fr 1fr}}
+
+/* FEATURES */
+.features{padding:5rem 0}
+.section-tag{text-align:center;color:var(--p);font-size:.75rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.5rem}
+.section-title{text-align:center;font-size:clamp(1.5rem,3vw,2.2rem);font-weight:900;letter-spacing:-.02em;margin-bottom:.6rem}
+.section-sub{text-align:center;color:var(--t2);font-size:.95rem;max-width:550px;margin:0 auto 3rem}
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.feat-card{background:var(--card);border-radius:var(--r);padding:1.8rem 1.5rem;border:1px solid rgba(0,0,0,.05);transition:.3s;position:relative;overflow:hidden}
+.feat-card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,0,0,.06);border-color:var(--p3)}
+.feat-card .fi{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:#fff;margin-bottom:1rem}
+.feat-card:nth-child(1) .fi{background:var(--g1)}.feat-card:nth-child(2) .fi{background:var(--g3)}
+.feat-card:nth-child(3) .fi{background:var(--g2)}.feat-card:nth-child(4) .fi{background:var(--g4)}
+.feat-card:nth-child(5) .fi{background:linear-gradient(135deg,#f472b6,#c084fc)}.feat-card:nth-child(6) .fi{background:linear-gradient(135deg,#fb923c,#facc15)}
+.feat-card h3{font-size:1.05rem;font-weight:700;margin-bottom:.4rem}
+.feat-card p{font-size:.84rem;color:var(--t2);line-height:1.5}
+@media(max-width:768px){.feat-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:500px){.feat-grid{grid-template-columns:1fr}}
+
+/* PRICING */
+.pricing{padding:5rem 0;background:linear-gradient(180deg,var(--bg),rgba(124,58,237,.03))}
+.price-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;max-width:900px;margin:0 auto}
+.price-card{background:var(--card);border-radius:20px;padding:2rem 1.8rem;border:2px solid rgba(0,0,0,.04);text-align:center;transition:.3s;position:relative}
+.price-card.pop{border-color:var(--p);box-shadow:0 8px 30px rgba(124,58,237,.12);transform:scale(1.03)}
+.price-card.pop::before{content:'POPULER';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--g1);color:#fff;padding:.25rem 1rem;border-radius:20px;font-size:.68rem;font-weight:800;letter-spacing:.06em}
+.price-card .plan{font-size:.85rem;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem}
+.price-card .amount{font-size:2.5rem;font-weight:900;color:var(--text);margin-bottom:.2rem}
+.price-card .amount small{font-size:.85rem;font-weight:500;color:var(--t3)}
+.price-card .old-price{font-size:.85rem;color:var(--t3);text-decoration:line-through;margin-bottom:1rem}
+.price-card ul{list-style:none;text-align:left;margin:1.5rem 0}
+.price-card li{font-size:.84rem;color:var(--t2);padding:.4rem 0;display:flex;align-items:center;gap:.5rem}
+.price-card li i{color:var(--p);font-size:1rem}
+.price-card .btn-price{display:block;width:100%;padding:.75rem;border-radius:12px;font-weight:700;font-size:.9rem;cursor:pointer;border:2px solid var(--p);transition:.2s}
+.price-card .btn-price.fill{background:var(--g1);color:#fff;border-color:transparent}.price-card .btn-price.fill:hover{box-shadow:0 4px 16px rgba(124,58,237,.25)}
+.price-card .btn-price.ghost{background:transparent;color:var(--p)}.price-card .btn-price.ghost:hover{background:rgba(124,58,237,.06)}
+
+/* CTA */
+.cta{padding:5rem 0;text-align:center}
+.cta-box{background:var(--g1);border-radius:24px;padding:3.5rem 2rem;color:#fff;position:relative;overflow:hidden}
+.cta-box::after{content:'';position:absolute;right:-40px;bottom:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06)}
+.cta-box h2{font-size:clamp(1.5rem,3vw,2rem);font-weight:900;margin-bottom:.6rem}
+.cta-box p{opacity:.8;max-width:500px;margin:0 auto 1.5rem;font-size:.95rem}
+
+/* FOOTER */
+.footer{background:var(--dark);color:rgba(255,255,255,.5);padding:3rem 0 1.5rem}
+.footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{color:#fff;font-weight:800;font-size:1.1rem;display:flex;align-items:center;gap:.5rem}
+.footer-brand img{width:28px;height:28px;border-radius:8px}
+.footer-links{display:flex;gap:1.5rem}
+.footer-links a{font-size:.82rem;transition:.2s}.footer-links a:hover{color:#fff}
+.footer-copy{text-align:center;margin-top:2rem;font-size:.75rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.08)}
+</style>
+</head>
+<body>
+<script>if(localStorage.getItem('mt_token'))window.location.replace('/app');</script>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="container">
+    <a href="/" class="nav-brand"><img src="/icon-192.png" alt="">E-Pesantren</a>
+    <div class="nav-links">
+      <a href="#fitur">Fitur</a>
+      <a href="#harga">Harga</a>
+      <a href="/app">Login</a>
+      <a href="https://wa.me/+6281216599910?text=Halo%2C%20saya%20tertarik%20dengan%20E-Pesantren" target="_blank" class="nav-cta">Mulai Gratis</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge"><i class="ri-sparkle-line"></i> Platform #1 Manajemen Pesantren Digital</div>
+    <h1>Kelola Pesantren<br><span>Lebih Mudah & Modern</span></h1>
+    <p>Absensi digital, raport otomatis, catatan guru, pelanggaran, dan manajemen santri dalam satu platform cloud yang bisa diakses kapanpun dan dimanapun.</p>
+    <div class="hero-btns">
+      <a href="https://wa.me/+6281216599910?text=Halo%2C%20saya%20tertarik%20dengan%20E-Pesantren" target="_blank" class="btn-hero primary"><i class="ri-rocket-line"></i> Mulai Sekarang</a>
+      <a href="#fitur" class="btn-hero outline"><i class="ri-play-circle-line"></i> Lihat Fitur</a>
+    </div>
+    <div class="hero-img">
+      <div class="mock"><div class="mock-inner"><img src="/hero-mockup.png" alt="Dashboard E-Pesantren" style="width:100%;height:100%;object-fit:cover;border-radius:14px"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-bar">
+  <div class="container">
+    <div class="stat-item"><div class="num">50+</div><div class="lbl">Pesantren Terdaftar</div></div>
+    <div class="stat-item"><div class="num">1,000+</div><div class="lbl">Santri Aktif</div></div>
+    <div class="stat-item"><div class="num">200+</div><div class="lbl">Ustadz & Guru</div></div>
+    <div class="stat-item"><div class="num">99.9%</div><div class="lbl">Uptime Server</div></div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="fitur">
+  <div class="container">
+    <div class="section-tag">Fitur Unggulan</div>
+    <h2 class="section-title">Semua yang Pesantren Anda Butuhkan</h2>
+    <p class="section-sub">Dari absensi harian hingga raport bulanan, semuanya terintegrasi dalam satu dashboard yang mudah digunakan.</p>
+    <div class="feat-grid">
+      <div class="feat-card"><div class="fi"><i class="ri-checkbox-circle-line"></i></div><h3>Absensi Digital</h3><p>Absensi harian, malam, dan sekolah dengan satu klik. Rekap otomatis per bulan dan per kegiatan.</p></div>
+      <div class="feat-card"><div class="fi"><i class="ri-file-chart-line"></i></div><h3>Raport Otomatis</h3><p>Generate raport santri dalam format PDF & Excel lengkap dengan rekap absensi, catatan guru, dan pelanggaran.</p></div>
+      <div class="feat-card"><div class="fi"><i class="ri-hotel-bed-line"></i></div><h3>Manajemen Asrama</h3><p>Kelola kamar, kapasitas, dan penempatan santri secara visual. Lihat siapa di kamar mana dengan mudah.</p></div>
+      <div class="feat-card"><div class="fi"><i class="ri-team-line"></i></div><h3>Multi-Role</h3><p>Dashboard berbeda untuk Admin, Ustadz, dan Wali Santri. Setiap role mendapat akses sesuai kebutuhan.</p></div>
+      <div class="feat-card"><div class="fi"><i class="ri-error-warning-line"></i></div><h3>Catatan & Pelanggaran</h3><p>Catat perkembangan santri dan pelanggaran dengan sistem poin. Transparan untuk orang tua.</p></div>
+      <div class="feat-card"><div class="fi"><i class="ri-smartphone-line"></i></div><h3>Mobile Friendly</h3><p>Akses dari HP, tablet, atau laptop. Tampilan responsif ala aplikasi native dengan PWA support.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="harga">
+  <div class="container">
+    <div class="section-tag">Harga</div>
+    <h2 class="section-title">Paket Terjangkau untuk Semua</h2>
+    <p class="section-sub">Mulai kelola pesantren Anda hari ini. Tanpa biaya setup, tanpa biaya tersembunyi.</p>
+    <div class="price-grid">
+      <div class="price-card">
+        <div class="plan">Trial</div>
+        <div class="amount">Gratis</div>
+        <div class="old-price">&nbsp;</div>
+        <ul>
+          <li><i class="ri-check-line"></i> 14 hari percobaan</li>
+          <li><i class="ri-check-line"></i> Semua fitur dasar</li>
+          <li><i class="ri-check-line"></i> Maks 20 santri</li>
+          <li><i class="ri-check-line"></i> 1 admin user</li>
+        </ul>
+        <a href="https://wa.me/+6281216599910?text=Halo%2C%20saya%20ingin%20coba%20paket%20Trial%20E-Pesantren" target="_blank" class="btn-price ghost">Coba Gratis</a>
+      </div>
+      <div class="price-card pop">
+        <div class="plan">Bulanan</div>
+        <div class="amount">Rp 200rb <small>/bulan</small></div>
+        <div class="old-price">Rp 350.000</div>
+        <ul>
+          <li><i class="ri-check-line"></i> Santri unlimited</li>
+          <li><i class="ri-check-line"></i> Semua fitur premium</li>
+          <li><i class="ri-check-line"></i> Unlimited user</li>
+          <li><i class="ri-check-line"></i> Raport PDF & Excel</li>
+          <li><i class="ri-check-line"></i> Support WhatsApp</li>
+        </ul>
+        <a href="https://wa.me/+6281216599910?text=Halo%2C%20saya%20ingin%20langganan%20paket%20Bulanan%20E-Pesantren" target="_blank" class="btn-price fill">Langganan Sekarang</a>
+      </div>
+      <div class="price-card">
+        <div class="plan">Tahunan</div>
+        <div class="amount">Rp 2jt <small>/tahun</small></div>
+        <div class="old-price">Rp 4.200.000</div>
+        <ul>
+          <li><i class="ri-check-line"></i> Semua fitur bulanan</li>
+          <li><i class="ri-check-line"></i> Hemat 2 bulan</li>
+          <li><i class="ri-check-line"></i> Priority support</li>
+          <li><i class="ri-check-line"></i> Custom branding</li>
+          <li><i class="ri-check-line"></i> Backup harian</li>
+        </ul>
+        <a href="https://wa.me/+6281216599910?text=Halo%2C%20saya%20ingin%20langganan%20paket%20Tahunan%20E-Pesantren" target="_blank" class="btn-price ghost">Pilih Tahunan</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="container">
+    <div class="cta-box">
+      <h2>Siap Digitalisasi Pesantren Anda?</h2>
+      <p>Bergabung dengan ratusan pesantren lainnya yang sudah menggunakan E-Pesantren untuk manajemen yang lebih efisien.</p>
+      <a href="https://wa.me/+6281216599910?text=Halo%2C%20saya%20ingin%20daftar%20E-Pesantren" target="_blank" class="btn-hero primary" style="background:#fff;color:var(--p2);border-color:#fff"><i class="ri-rocket-line"></i> Daftar Sekarang — Gratis!</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-brand"><img src="/icon-192.png" alt="">E-Pesantren</div>
+    <div class="footer-links">
+      <a href="#fitur">Fitur</a>
+      <a href="#harga">Harga</a>
+      <a href="/app">Login</a>
+    </div>
+  </div>
+  <div class="container"><div class="footer-copy">© 2026 E-Pesantren. All rights reserved.</div></div>
+</footer>
+</body>
+</html>

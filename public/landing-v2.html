@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="E-Pesantren — Sistem Manajemen Pesantren Digital. Kelola absensi, keuangan, raport, dan data santri dalam satu aplikasi. Dipercaya 50+ pesantren se-Indonesia.">
+<title>E-Pesantren — Berhenti Urus Data Pesantren Pakai Buku & Excel</title>
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="landing-v2.css">
+</head>
+<body>
+<script>if(localStorage.getItem('mt_token'))window.location.replace('/app');</script>
+
+<!-- ═══ NAV ═══ -->
+<nav class="nav" id="navbar">
+  <div class="container">
+    <a href="/" class="nav-brand"><img src="/icon-192.png" alt="e-Pesantren">
+      <div>e-Pesantren<span>Sistem Digital Pesantren</span></div>
+    </a>
+    <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+      <i class="ri-menu-3-line"></i>
+    </button>
+    <div class="nav-links">
+      <a href="#fitur">Fitur</a>
+      <a href="#harga">Harga</a>
+      <a href="#testimoni">Testimoni</a>
+      <a href="#faq">FAQ</a>
+      <a href="/app">Login</a>
+      <a href="https://wa.me/+6281216599910?text=Halo%2C%20saya%20tertarik%20dengan%20E-Pesantren" target="_blank" class="nav-cta"><i class="ri-whatsapp-line"></i> Demo via WA</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══ SECTION 1: HERO ═══ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-left">
+      <div class="hero-badge"><i class="ri-verified-badge-fill"></i> SUDAH DIPERCAYA 50+ PESANTREN DI INDONESIA</div>
+      <h1>BERHENTI URUS DATA PESANTREN <span class="accent">PAKAI BUKU & EXCEL.</span></h1>
+      <p class="hero-desc">Mulai hari ini, kelola absensi, keuangan, raport, dan data santri dalam satu sistem yang dipakai puluhan pesantren se-Indonesia. Cukup HP & internet, tanpa tambah staff baru.</p>
+      <div class="hero-btns">
+        <a href="https://wa.me/+6281216599910?text=Halo%2C%20saya%20ingin%20coba%20gratis%20E-Pesantren%2030%20hari" target="_blank" class="btn-primary"><i class="ri-rocket-2-fill"></i> COBA GRATIS 30 HARI</a>
+        <a href="https://wa.me/+6281216599910?text=Halo%2C%20saya%20ingin%20lihat%20demo%20E-Pesantren" target="_blank" class="btn-outline"><i class="ri-whatsapp-line"></i> LIHAT DEMO VIA WHATSAPP</a>
+      </div>
+      <div class="hero-trust">
+        <span><span class="check">✓</span> Tanpa kartu kredit</span>
+        <span><span class="check">✓</span> Setup gratis</span>
+        <span><span class="check">✓</span> Stop kapan aja</span>
+      </div>
+    </div>
+    <div class="hero-right">
+      <img src="/hero-mockup.png" alt="Dashboard e-Pesantren" class="hero-mockup">
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 2: PROBLEM AGITATION ═══ -->
+<section class="problems section-pad">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:2.5rem">
+      <div class="s-tag" style="justify-content:center"><i class="ri-error-warning-fill"></i> WAKE UP CALL</div>
+      <h2 class="s-title">JANGAN BIARKAN HAL INI TERUS TERJADI<br>DI PESANTREN ANDA</h2>
+    </div>
+    <div class="prob-grid">
+      <div class="prob-card fade-up">
+        <span class="prob-icon">❌</span>
+        <div class="prob-cmd">HENTIKAN</div>
+        <div class="prob-desc">Absensi yang sering hilang & dicurangi. Data kehadiran santri harus akurat, bukan kira-kira.</div>
+      </div>
+      <div class="prob-card fade-up">
+        <span class="prob-icon">❌</span>
+        <div class="prob-cmd">STOP</div>
+        <div class="prob-desc">Rekap keuangan yang bikin bendahara begadang. Laporan harusnya otomatis, bukan manual.</div>
+      </div>
+      <div class="prob-card fade-up">
+        <span class="prob-icon">❌</span>
+        <div class="prob-cmd">JANGAN BIARKAN</div>
+        <div class="prob-desc">Wali santri tidak tahu kabar anaknya. Transparansi itu hak setiap orang tua.</div>
+      </div>
+      <div class="prob-card fade-up">
+        <span class="prob-icon">❌</span>
+        <div class="prob-cmd">AKHIRI</div>
+        <div class="prob-desc">Raport manual yang ditulis ulang puluhan kali. Waktu ustadz terlalu berharga untuk ini.</div>
+      </div>
+      <div class="prob-card fade-up">
+        <span class="prob-icon">❌</span>
+        <div class="prob-cmd">TINGGALKAN</div>
+        <div class="prob-desc">Sistem lama yang bikin kyai pusing tiap akhir bulan. Sudah saatnya berubah.</div>
+      </div>
+      <div class="prob-card fade-up">
+        <span class="prob-icon">❌</span>
+        <div class="prob-cmd">JANGAN TUNGGU</div>
+        <div class="prob-desc">Data hilang baru menyesal. Backup otomatis seharusnya jadi standar.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 3: SOLUSI ═══ -->
+<section class="solutions section-pad" id="solusi">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:2.5rem">
+      <div class="s-tag" style="justify-content:center"><i class="ri-magic-fill"></i> SOLUSI NYATA</div>
+      <h2 class="s-title">MULAI KELOLA PESANTREN SEPERTI INI:</h2>
+    </div>
+    <div class="sol-grid">
+      <div class="sol-card fade-up">
+        <span class="sol-emoji">📲</span>
+        <div class="sol-cmd">KETUK SEKALI <span class="arrow">→</span> ABSENSI BERES</div>
+        <p class="sol-desc">Buka HP, ceklis santri hadir, selesai. Laporan otomatis masuk ke kyai. Tidak perlu kertas, tidak perlu rekap ulang.</p>
+      </div>
+      <div class="sol-card fade-up">
+        <span class="sol-emoji">💰</span>
+        <div class="sol-cmd">INPUT SEKALI <span class="arrow">→</span> LAPORAN OTOMATIS</div>
+        <p class="sol-desc">Catat pemasukan & pengeluaran, sistem yang hitung. Bendahara hemat 10 jam/minggu. Transparan dan terlacak.</p>
+      </div>
+      <div class="sol-card fade-up">
+        <span class="sol-emoji">📊</span>
+        <div class="sol-cmd">KLIK SEKALI <span class="arrow">→</span> RAPORT JADI</div>
+        <p class="sol-desc">Input nilai per mapel, langsung jadi PDF rapi siap cetak. Tanpa tulis ulang. Kirim ke wali santri otomatis.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 4: FITUR ═══ -->
+<section class="features section-pad" id="fitur">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:2.5rem">
+      <div class="s-tag" style="justify-content:center"><i class="ri-apps-fill"></i> FITUR LENGKAP</div>
+      <h2 class="s-title">DAPATKAN SEMUA INI DALAM 1 APLIKASI</h2>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card fade-up">
+        <div class="feat-icon"><i class="ri-user-follow-line"></i></div>
+        <div class="feat-cmd">PANTAU KEHADIRAN</div>
+        <div class="feat-desc">Real-time, dari mana saja. Rekap otomatis per kelas, per kegiatan, per santri. Langsung tersedia.</div>
+      </div>
+      <div class="feat-card fade-up">
+        <div class="feat-icon"><i class="ri-money-dollar-circle-line"></i></div>
+        <div class="feat-cmd">KELOLA KEUANGAN</div>
+        <div class="feat-desc">Transparan & terlacak. Pemasukan, pengeluaran, pembayaran SPP — semua tercatat rapi otomatis.</div>
+      </div>
+      <div class="feat-card fade-up">
+        <div class="feat-icon"><i class="ri-search-eye-line"></i></div>
+        <div class="feat-cmd">LACAK SANTRI</div>
+        <div class="feat-desc">Data lengkap, mudah dicari. Profil, riwayat, status pembayaran — satu klik langsung ketemu.</div>
+      </div>
+      <div class="feat-card fade-up">
+        <div class="feat-icon"><i class="ri-file-chart-line"></i></div>
+        <div class="feat-cmd">KIRIM RAPORT</div>
+        <div class="feat-desc">Otomatis ke wali santri. Input nilai, generate PDF, kirim. Tanpa tulis tangan ulang.</div>
+      </div>
+      <div class="feat-card fade-up">
+        <div class="feat-icon"><i class="ri-cloud-line"></i></div>
+        <div class="feat-cmd">BACKUP DATA</div>
+        <div class="feat-desc">Aman, tidak akan hilang. Backup harian otomatis ke server. Data pesantren terlindungi 24/7.</div>
+      </div>
+      <div class="feat-card fade-up">
+        <div class="feat-icon"><i class="ri-shield-keyhole-line"></i></div>
+        <div class="feat-cmd">ATUR HAK AKSES</div>
+        <div class="feat-desc">Per peran, terkontrol. Admin, ustadz, bendahara — masing-masing hanya lihat data yang relevan.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 5: PRICING ═══ -->
+<section class="pricing section-pad" id="harga">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:2.5rem">
+      <div class="s-tag" style="justify-content:center"><i class="ri-price-tag-3-fill"></i> HARGA TRANSPARAN</div>
+      <h2 class="s-title">PILIH PAKET YANG SESUAI PESANTREN ANDA</h2>
+      <p class="s-sub mx-auto">Tidak ada biaya tersembunyi. Pilih sesuai kebutuhan dan budget pesantren.</p>
+    </div>
+    <div class="price-grid">
+      <!-- HEMAT -->
+      <div class="price-card featured fade-up">
+        <span class="price-badge">⭐ RECOMMENDED</span>
+        <div class="price-name">HEMAT</div>
+        <div class="price-amount">Rp 108.000<span style="font-size:.6em;font-weight:600;color:var(--t2)">/bulan</span></div>
+        <div class="price-period">Dibayar Rp 1.300.000/tahun</div>
+        <ul class="price-features">
+          <li>Semua fitur tanpa batas</li>
+          <li>Update otomatis</li>
+          <li>Backup harian</li>
+          <li>Support WhatsApp grup</li>
+          <li>Training 2x sesi gratis</li>
+          <li>Setup data 100 santri pertama gratis</li>
+        </ul>
+        <a href="https://wa.me/+6281216599910?text=Halo%2C%20saya%20ingin%20langganan%20paket%20HEMAT%20E-Pesantren" target="_blank" class="price-cta primary">LANGGANAN SEKARANG</a>
+      </div>
+      <!-- LIFETIME -->
+      <div class="price-card fade-up">
+        <div class="price-name">LIFETIME</div>
+        <div class="price-amount">Rp 7.000.000</div>
+        <div class="price-period">SEKALI BAYAR — Pakai selamanya</div>
+        <ul class="price-features">
+          <li>Bayar sekali, pakai selamanya</li>
+          <li>Semua fitur saat ini</li>
+          <li>Update keamanan 5 tahun</li>
+          <li>Support 1 tahun pertama</li>
+          <li>Training & setup gratis</li>
+          <li>Tidak ada biaya tahunan</li>
+        </ul>
+        <a href="https://wa.me/+6281216599910?text=Halo%2C%20saya%20ingin%20paket%20LIFETIME%20E-Pesantren" target="_blank" class="price-cta outline">BAYAR SEKALI, BERES</a>
+      </div>
+      <!-- SELF-HOSTED -->
+      <div class="price-card fade-up">
+        <div class="price-name">SELF-HOSTED</div>
+        <div class="price-amount" style="font-size:1.6rem">Rp 5.000.000</div>
+        <div class="price-period">+ Rp 1jt/tahun maintenance</div>
+        <ul class="price-features">
+          <li>Install di server pesantren sendiri</li>
+          <li>Data 100% di pesantren</li>
+          <li>Source code dijamin</li>
+          <li>Cocok untuk yayasan besar</li>
+          <li>Custom branding</li>
+        </ul>
+        <a href="https://wa.me/+6281216599910?text=Halo%2C%20saya%20ingin%20paket%20SELF-HOSTED%20E-Pesantren" target="_blank" class="price-cta outline">HUBUNGI TIM KAMI</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 6: ONBOARDING / OBJECTION KILLER ═══ -->
+<section class="onboard section-pad">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:2.5rem">
+      <div class="s-tag" style="justify-content:center"><i class="ri-hand-heart-fill"></i> KAMI BANTU SEMUA</div>
+      <h2 class="s-title">KHAWATIR STAFF BELUM SIAP?<br>TENANG, KAMI YANG ATUR.</h2>
+    </div>
+    <div class="onb-grid">
+      <div class="onb-card fade-up">
+        <span class="onb-emoji">👨‍🏫</span>
+        <div class="onb-title">KAMI LATIH STAFF ANDA</div>
+        <div class="onb-desc">2 sesi training Zoom GRATIS untuk maksimal 5 staff. Kami dampingi sampai benar-benar bisa dan mandiri.</div>
+      </div>
+      <div class="onb-card fade-up">
+        <span class="onb-emoji">📚</span>
+        <div class="onb-title">KAMI INPUT DATA AWAL</div>
+        <div class="onb-desc">Tim kami bantu input 100 santri pertama. Tinggal terima beres. Anda tidak perlu repot sama sekali.</div>
+      </div>
+      <div class="onb-card fade-up">
+        <span class="onb-emoji">💬</span>
+        <div class="onb-title">KAMI STANDBY 30 HARI</div>
+        <div class="onb-desc">Grup WhatsApp khusus pesantren Anda. Tanya apa saja, kapan saja. Respon cepat dan ramah.</div>
+      </div>
+    </div>
+    <div class="onb-closing">JADI SATU-SATUNYA YANG PERLU ANDA LAKUKAN:<br>KATAKAN <span style="color:#fff">"YA, MULAI."</span></div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 7: TESTIMONI ═══ -->
+<section class="testimonials section-pad" id="testimoni">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:2.5rem">
+      <div class="s-tag" style="justify-content:center"><i class="ri-chat-quote-fill"></i> TESTIMONI</div>
+      <h2 class="s-title">DENGAR LANGSUNG DARI YANG SUDAH PAKAI</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="t-card fade-up">
+        <div class="quote-mark">"</div>
+        <p class="t-text"><strong>"COBA SAJA.</strong> Kami ragu di awal, sekarang gak bisa lepas. Semua data pesantren rapi dan bisa diakses kapan saja."</p>
+        <div class="t-author">
+          <div class="t-avatar">A</div>
+          <div>
+            <div class="t-name">KH Ahmad Fauzi</div>
+            <div class="t-role">Pesantren Al-Hikmah, Jember</div>
+            <div class="t-stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+      <div class="t-card fade-up">
+        <div class="quote-mark">"</div>
+        <p class="t-text"><strong>"PAKAI INI.</strong> Bendahara saya sekarang pulang lebih cepat 2 jam tiap hari. Rekap keuangan yang dulu makan waktu, sekarang otomatis."</p>
+        <div class="t-author">
+          <div class="t-avatar">M</div>
+          <div>
+            <div class="t-name">Ust. Mahmud</div>
+            <div class="t-role">Bendahara PP Nurul Hikmah, Solo</div>
+            <div class="t-stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+      <div class="t-card fade-up">
+        <div class="quote-mark">"</div>
+        <p class="t-text"><strong>"PERCAYAKAN KE TIM E-PESANTREN.</strong> Mereka latih semua staff sampai bisa. Bahkan ustadzah yang gagap teknologi sekarang mahir."</p>
+        <div class="t-author">
+          <div class="t-avatar">S</div>
+          <div>
+            <div class="t-name">Ny. Siti Rohmah</div>
+            <div class="t-role">Pesantren Putri Al-Falah, Bandung</div>
+            <div class="t-stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 8: FAQ ═══ -->
+<section class="faq section-pad" id="faq">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:2.5rem">
+      <div class="s-tag" style="justify-content:center"><i class="ri-question-answer-fill"></i> FAQ</div>
+      <h2 class="s-title">PERTANYAAN YANG SERING DITANYAKAN</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Harus bayar setiap tahun?
+          <i class="ri-arrow-down-s-line"></i>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner"><strong>TIDAK HARUS.</strong> Pilih paket Lifetime — bayar sekali Rp 7jt, pakai selamanya. Atau pilih paket Hemat kalau mau fleksibel Rp 108rb/bulan.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Staff saya tidak terbiasa dengan komputer/HP, bisa?
+          <i class="ri-arrow-down-s-line"></i>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner"><strong>BISA.</strong> Kami latih sampai bisa. Tutorial bahasa Indonesia simple, support WhatsApp, dan kami bantu setup data awal. Banyak ustadz/ustadzah yang awalnya gagap teknologi, sekarang mahir.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Bagaimana kalau internet di pesantren lemah?
+          <i class="ri-arrow-down-s-line"></i>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner"><strong>AMAN.</strong> Aplikasi kami ringan, jalan di sinyal 3G. Data tersimpan otomatis ke server, gak perlu install di komputer.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Apakah data pesantren kami aman?
+          <i class="ri-arrow-down-s-line"></i>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner"><strong>AMAN.</strong> Backup harian otomatis, server di Indonesia, hak akses per peran. Pesantren A tidak bisa lihat data Pesantren B. Privasi 100% terjaga.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Kalau ingin berhenti?
+          <i class="ri-arrow-down-s-line"></i>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner"><strong>BEBAS.</strong> Tidak ada kontrak ikat. Stop kapan saja, data bisa di-export ke Excel. Tanpa penalti, tanpa drama.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Bisa custom sesuai kebutuhan pesantren kami?
+          <i class="ri-arrow-down-s-line"></i>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner"><strong>BISA</strong>, tergantung paket. Self-hosted bisa custom penuh termasuk branding. Subscription bisa request fitur via support.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 9: FINAL CTA ═══ -->
+<section class="final-cta section-pad">
+  <div class="container">
+    <div class="urgency-banner">⏰ PROMO TERBATAS — 10 PESANTREN PERTAMA BULAN INI DAPAT DISKON 35%</div>
+    <h2 class="s-title">JANGAN TUNDA LAGI.<br>PESANTREN LAIN SUDAH MULAI.</h2>
+    <p class="s-sub mx-auto" style="color:rgba(255,255,255,.7)">Mulai hari ini juga. Tanpa biaya setup. Tanpa risiko. Cukup 30 menit untuk pesantren Anda lebih rapi & modern selamanya.</p>
+    <a href="https://wa.me/+6281216599910?text=Halo%2C%20saya%20ingin%20mulai%20trial%2030%20hari%20E-Pesantren" target="_blank" class="btn-mega"><i class="ri-cursor-fill"></i> KETUK DI SINI → MULAI 30 HARI GRATIS</a>
+    <div class="final-trust">
+      <span><span class="check">✓</span> 50+ pesantren sudah pakai</span>
+      <span><span class="check">✓</span> Setup gratis</span>
+      <span><span class="check">✓</span> Bisa stop kapan saja</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 10: FOOTER ═══ -->
+<footer class="footer">
+  <div class="container">
+    <div>
+      <div class="footer-brand"><img src="/icon-192.png" alt="">
+        <div>e-Pesantren</div>
+      </div>
+      <p class="footer-tagline">Sistem Digital Pesantren — Membantu pesantren di seluruh Indonesia mengelola data lebih rapi, modern, dan transparan.</p>
+    </div>
+    <div>
+      <h4>Menu</h4>
+      <div class="footer-links">
+        <a href="#fitur">Fitur</a>
+        <a href="#harga">Harga</a>
+        <a href="#testimoni">Testimoni</a>
+        <a href="#faq">FAQ</a>
+        <a href="/app">Login</a>
+      </div>
+    </div>
+    <div>
+      <h4>Hubungi Kami</h4>
+      <div class="footer-contact">
+        <div><i class="ri-whatsapp-line"></i> 0812-1659-9910</div>
+        <div><i class="ri-mail-line"></i> info@e-pesantren.app</div>
+        <div><i class="ri-time-line"></i> Sen-Jum 09.00-17.00 WIB</div>
+      </div>
+    </div>
+    <div>
+      <h4>Alamat</h4>
+      <div class="footer-contact">
+        <div><i class="ri-map-pin-line"></i> Indonesia</div>
+      </div>
+    </div>
+  </div>
+  <div class="container"><div class="footer-copy">© 2026 e-Pesantren. Sistem Digital untuk Pesantren. All rights reserved.</div></div>
+</footer>
+
+<!-- ═══ SCRIPTS ═══ -->
+<script>
+// Navbar scroll effect
+const nav=document.getElementById('navbar');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>50)});
+
+// Fade-up on scroll (IntersectionObserver)
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})
+},{threshold:.15});
+document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+
+// Smooth scroll for nav links
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    e.preventDefault();
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t)t.scrollIntoView({behavior:'smooth',block:'start'});
+    document.querySelector('.nav-links')?.classList.remove('open');
+  });
+});
+
+// FAQ - open first by default
+document.querySelector('.faq-item')?.classList.add('open');
+</script>
+</body>
+</html>

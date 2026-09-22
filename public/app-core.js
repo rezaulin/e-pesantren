@@ -647,7 +647,7 @@ function buildSidebar() {
       html += sec("KEGIATAN");
       if (isAdmin)
         html += itm(
-          "kegiatan-master",
+          "kegiatan",
           "ph-duotone ph-book-open",
           "Kelola Kegiatan",
         );
@@ -803,7 +803,7 @@ async function loadView(id) {
       case "kegiatan":
         return await loadKegiatan();
       case "kelompok":
-      case "kegiatan-master":
+      case "kegiatan":
         return await loadKelompok();
       case "absensi":
         return await loadAbsensi();

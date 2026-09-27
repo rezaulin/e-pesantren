@@ -1412,7 +1412,7 @@ body.dark-mode .icon-card {
   border-color: rgba(241, 245, 249, 0.08);
 }
 
-body.dark-mode .grid-card {
+body.dark-mode .grid-card { position:relative;
   background: #1e293b;
   border-color: rgba(241, 245, 249, 0.08);
 }
@@ -1796,7 +1796,7 @@ body.dark-mode .icon-card {
   border-color: rgba(241, 245, 249, 0.08) !important;
 }
 
-body.dark-mode .grid-card {
+body.dark-mode .grid-card { position:relative;
   background: #1e293b !important;
   border-color: rgba(241, 245, 249, 0.08) !important;
 }
@@ -2205,3 +2205,514 @@ body.dark-mode .cp { color: #34d399 !important; }
 body.dark-mode .ct1 { color: #f1f5f9 !important; }
 body.dark-mode .ct2 { color: #cbd5e1 !important; }
 body.dark-mode .ct3 { color: #94a3b8 !important; }
+/* ═══════════════════════════════════════════════════
+   CARD LAYOUT FIXES — Kelas, Jadwal, Absensi pages
+   Replaces inline styles with semantic CSS classes
+   ═══════════════════════════════════════════════════ */
+
+/* ── GRID CARDS (Kelas pages) ── */
+.grid-card { position:relative;
+  padding: 1.2rem !important;
+  cursor: pointer;
+}
+
+.grid-card .gc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.8rem;
+}
+
+.grid-card .gc-title {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--text);
+  margin-bottom: 0.3rem;
+}
+
+.grid-card .gc-info {
+  font-size: 0.8rem;
+  color: var(--t3);
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.grid-card .gc-edit-btn {
+  border: none;
+  background: transparent;
+  padding: 4px;
+}
+
+.grid-card .gc-edit-btn:hover {
+  background: var(--pbg);
+  border-radius: 8px;
+}
+
+.grid-card .gc-footer {
+  font-size: 0.7rem;
+  color: var(--t3);
+  margin-top: 0.3rem;
+}
+
+/* Grid card actions — better positioning */
+.grid-card .card-actions {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  display: flex;
+  gap: 0.3rem;
+}
+
+.grid-card .card-actions .btn {
+  padding: 4px 6px;
+  font-size: 0.75rem;
+}
+
+/* ── LIST ITEMS (Jadwal pages) ── */
+.list-view {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 1rem;
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.list-item:hover {
+  border-color: var(--p);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.08);
+  transform: translateY(-1px);
+}
+
+.list-item .left {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.list-item .icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.list-item .icon-blue {
+  background: #eef2ff;
+  color: #4f46e5;
+}
+
+.list-item .icon-green {
+  background: #ecfdf5;
+  color: #059669;
+}
+
+.list-item .icon-amber {
+  background: #fffbeb;
+  color: #d97706;
+}
+
+.list-item .info {
+  display: flex;
+  flex-direction: column;
+}
+
+.list-item .title {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--text);
+}
+
+.list-item .sub {
+  font-size: 0.75rem;
+  color: var(--t3);
+  margin-top: 0.1rem;
+}
+
+.list-item .actions {
+  color: var(--t3);
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+/* ── ABS-wrapper (Absensi pages) ── */
+.abs-wrapper {
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.abs-wrapper-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 0.8rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.abs-wrapper-header h2 {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.abs-wrapper-header .fg {
+  margin-bottom: 0;
+}
+
+/* ── ABS-LIST-ITEM (Absensi class tabs) ── */
+.abs-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 0.8rem;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: 0.2s;
+  border-radius: 8px;
+}
+
+.abs-list-item:last-child {
+  border-bottom: none;
+}
+
+.abs-list-item:hover {
+  background: var(--pbg);
+}
+
+.abs-list-item.active {
+  background: var(--pbg);
+  border-left: 3px solid var(--p);
+  padding-left: calc(0.8rem - 3px);
+}
+
+.abs-list-item .alc-left {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.abs-list-item .alc-right {
+  color: var(--t3);
+  font-size: 1.2rem;
+}
+
+/* ── ABS-TABS (Diniyyah absensi) ── */
+.abs-tabs {
+  display: flex;
+  gap: 0.4rem;
+  padding: 0.5rem;
+  background: var(--bg);
+  border-radius: 12px;
+  overflow-x: auto;
+  flex-wrap: wrap;
+}
+
+.abs-tab {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--t3);
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  transition: 0.2s;
+  white-space: nowrap;
+}
+
+.abs-tab:hover {
+  border-color: var(--p);
+  color: var(--p);
+}
+
+.abs-tab.active {
+  background: var(--p);
+  color: #fff;
+  border-color: var(--p);
+}
+
+/* ── EMPTY STATE (instruction text) ── */
+.empty-hint {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--t3);
+}
+
+.empty-hint i {
+  font-size: 1.5rem;
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--p);
+  opacity: 0.5;
+}
+
+/* ── DARK MODE for new card components ── */
+body.dark-mode .abs-wrapper {
+  background: #1e293b !important;
+  border-color: rgba(241, 245, 249, 0.08) !important;
+}
+
+body.dark-mode .abs-tabs {
+  background: rgba(15, 23, 42, 0.3) !important;
+}
+
+body.dark-mode .abs-tab {
+  background: #1e293b !important;
+  border-color: rgba(241, 245, 249, 0.08) !important;
+  color: #94a3b8 !important;
+}
+
+body.dark-mode .abs-tab.active {
+  background: var(--p) !important;
+  color: #fff !important;
+}
+
+body.dark-mode .list-item {
+  background: #1e293b !important;
+  border-color: rgba(241, 245, 249, 0.08) !important;
+}
+
+body.dark-mode .list-item:hover {
+  border-color: rgba(59, 130, 246, 0.3) !important;
+}
+
+body.dark-mode .abs-list-item {
+  border-bottom-color: rgba(241, 245, 249, 0.06) !important;
+  color: #f1f5f9 !important;
+}
+
+body.dark-mode .abs-list-item:hover {
+  background: rgba(5, 150, 105, 0.1) !important;
+}
+
+body.dark-mode .abs-list-item.active {
+  background: rgba(5, 150, 105, 0.1) !important;
+  border-left-color: var(--p) !important;
+}
+
+body.dark-mode .list-item .icon-blue {
+  background: rgba(79, 70, 229, 0.15) !important;
+}
+
+body.dark-mode .list-item .icon-green {
+  background: rgba(5, 150, 105, 0.15) !important;
+}
+
+/* ── GRID RESPONSIVE (fix single-card ugly layout) ── */
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  
+  .abs-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+/* ═══ ABSENSI STAT CARDS ═══ */
+.stat-box {
+  flex: 1;
+  min-width: 200px;
+  text-align: center;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: 12px;
+  padding: 1rem;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05));
+}
+
+.stat-box-blue {
+  flex: 1;
+  min-width: 200px;
+  text-align: center;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 12px;
+  padding: 1rem;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.05));
+}
+
+.stat-box-purple {
+  flex: 1;
+  min-width: 200px;
+  text-align: center;
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  border-radius: 12px;
+  padding: 1rem;
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(168, 85, 247, 0.05));
+}
+
+.stat-box .stat-num {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.stat-box .stat-num-green { color: var(--green); }
+.stat-box .stat-num-blue { color: var(--blue); }
+.stat-box .stat-num-purple { color: #a855f7; }
+.stat-box .stat-num-amber { color: var(--amber); }
+
+.stat-box .stat-label {
+  font-size: 0.75rem;
+  color: var(--t3);
+  margin-top: 0.3rem;
+}
+
+/* Dark mode stat boxes */
+body.dark-mode .stat-box,
+body.dark-mode .stat-box-blue,
+body.dark-mode .stat-box-purple {
+  background: #1e293b !important;
+}
+
+/* ═══ ABS TABS (mobile scroll) ═══ */
+.abs-tabs {
+  display: flex;
+  gap: 0.4rem;
+  padding: 0.5rem;
+  background: var(--bg);
+  border-radius: 12px;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.abs-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+/* ═══ FORM GROUP IN ABS WRAPPER ═══ */
+.abs-wrapper .fg {
+  margin-bottom: 0;
+}
+
+/* ═══ ABS CONTENT EMPTY STATE ═══ */
+.abs-empty {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--t3);
+}
+
+.abs-empty i {
+  font-size: 1.5rem;
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--p);
+  opacity: 0.5;
+}
+
+/* ═══ BOTTOM BAR (fixed absensi) ═══ */
+.abs-bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.8rem 1rem;
+  background: var(--card);
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+  border-radius: 16px 16px 0 0;
+}
+
+body.dark-mode .abs-bottom-bar {
+  background: #0f172a !important;
+  border-top-color: rgba(241, 245, 249, 0.06) !important;
+}
+
+/* ═══ IMPROVED GRID CARD INTERNALS ═══ */
+.grid-card .gc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.8rem;
+}
+
+.grid-card .gc-title {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--text);
+  margin-bottom: 0.3rem;
+}
+
+.grid-card .gc-info {
+  font-size: 0.8rem;
+  color: var(--t3);
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.grid-card .gc-edit-btn {
+  border: none;
+  background: transparent;
+  padding: 4px;
+}
+
+.grid-card .gc-edit-btn:hover {
+  background: var(--pbg);
+  border-radius: 8px;
+}
+
+/* ═══ IMPROVED LIST ITEM ICON COLORS ═══ */
+.list-item .icon-blue {
+  background: #eef2ff;
+  color: #4f46e5;
+}
+
+.list-item .icon-green {
+  background: #ecfdf5;
+  color: #059669;
+}
+
+.list-item .icon-amber {
+  background: #fffbeb;
+  color: #d97706;
+}
+
+.list-item .icon-red {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+body.dark-mode .list-item .icon-blue {
+  background: rgba(79, 70, 229, 0.15) !important;
+}
+
+body.dark-mode .list-item .icon-green {
+  background: rgba(5, 150, 105, 0.15) !important;
+}
+
+body.dark-mode .list-item .icon-amber {
+  background: rgba(217, 119, 6, 0.15) !important;
+}
+
+body.dark-mode .list-item .icon-red {
+  background: rgba(220, 38, 38, 0.15) !important;
+}
